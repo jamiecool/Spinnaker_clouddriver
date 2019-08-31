@@ -48,7 +48,7 @@ public class ArtifactUtils {
     for (TarArchiveEntry entry = tarStream.getNextTarEntry();
         entry != null;
         entry = tarStream.getNextTarEntry()) {
-      File target = new File(baseDirectory, entry.getName());
+      File target = new File(basePath);
       if (entry.isDirectory()) {
         directoryStack.push(new DirectoryTimestamp(target, entry.getModTime().getTime()));
         continue;
