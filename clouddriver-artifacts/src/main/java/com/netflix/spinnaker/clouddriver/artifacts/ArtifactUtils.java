@@ -41,14 +41,14 @@ public class ArtifactUtils {
     // we need to set their timestamps after their children have been written.
     Stack<DirectoryTimestamp> directoryStack = new Stack<>();
 
-    File target = new File(baseDirectory, entry.getName());
+    File baseDirectory = new File(basePath);
     baseDirectory.mkdir();
 
     TarArchiveInputStream tarStream = new TarArchiveInputStream(inputStream);
     for (TarArchiveEntry entry = tarStream.getNextTarEntry();
         entry != null;
         entry = tarStream.getNextTarEntry()) {
-      File target = new File(basePath);
+      File target = new File(baseDirectory, entry.getName());
       if (entry.isDirectory()) {
         directoryStack.push(new DirectoryTimestamp(target, entry.getModTime().getTime()));
         continue;
